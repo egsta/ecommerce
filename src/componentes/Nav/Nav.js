@@ -164,9 +164,9 @@ export default function NavAppBar(props) {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={productos.length > 0 && productos.length} color="error">
-            <AddShoppingCartIcon />
-          </Badge>
+        <AddShoppingCartIcon sx={{mr: "4px"}} />
+              {productos.length >0 &&<Badge sx={{mb: "20px"}} badgeContent={ productos.length} color="error">
+              </Badge>}
         </IconButton>
         {productos.length > 0 && <ListaCart productos={productos} updateCart={updateCart}></ListaCart>}
       </MenuItem>
@@ -218,9 +218,9 @@ export default function NavAppBar(props) {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={productos.length  > 0 && productos.length} color="error">
-            <AddShoppingCartIcon />
-          </Badge>
+        <AddShoppingCartIcon sx={{mr: "4px"}} />
+              {productos.length >0 &&<Badge sx={{mb: "20px"}} badgeContent={ productos.length} color="error">
+              </Badge>}
         </IconButton>
         <p>Compras</p>
       </MenuItem>
@@ -292,10 +292,9 @@ export default function NavAppBar(props) {
            aria-controls={menuCartId}
            aria-haspopup="true"
            onClick={handleMenuCartOpen}
-           color="inherit">
-              <Badge badgeContent={productos.length >0 && productos.length} color="error">
-                <AddShoppingCartIcon />
-              </Badge>
+           color="inherit"> <AddShoppingCartIcon sx={{mr: "4px"}} />
+              {productos.length >0 &&<Badge sx={{mb: "20px"}} badgeContent={ productos.length} color="error">
+              </Badge>}
             </IconButton>
             </Box>
           {/* Manejo de carrito en pantalla mobiles */}
@@ -305,10 +304,9 @@ export default function NavAppBar(props) {
            aria-controls={mobileMenuCartId}
            aria-haspopup="true"
            onClick={handleMobileMenuCartOpen}
-           color="inherit">
-              <Badge badgeContent={productos.length > 0 && productos.length} color="error">
-                <AddShoppingCartIcon />
-              </Badge>
+           color="inherit"> <AddShoppingCartIcon sx={{mr: "4px"}} />
+           {productos.length >0 &&<Badge sx={{mb: "20px"}} badgeContent={ productos.length} color="error">
+           </Badge>}
             </IconButton>
             </Box>
           

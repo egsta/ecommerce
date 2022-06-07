@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Slider from "@mui/material/Slider";
+import CircularProgress from "@mui/material/CircularProgress";
 import "./App.css";
 
 function App() {
@@ -19,8 +20,7 @@ function App() {
   const [categoriaSel, setCategoriaSel] = useState("");
   const [cart, setCart] = useState([]);
   const [valueSlide, setValueSlide] = useState(3000);
-  
-  
+
   useEffect(() => {
     const buscarProductos = async () => {
       setCargando(false);
@@ -63,7 +63,6 @@ function App() {
     buscarProductos();
   }, [skip]);
 
-  
   const buscarProductosCategoria = async (cate) => {
     setCargando(false);
     setCategoriaSel(cate.target.value);
@@ -93,7 +92,7 @@ function App() {
   function more() {
     setSkip(skip + 3);
   }
-  
+
   function addToCart(id) {
     //console.log(data.products.filter(item=> item.id == id))
     let prod = data.products.filter((item) => item.id === id);
@@ -112,14 +111,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Nav
-          updateCart={actualizoProductos}
-          itemCart={cart}
-        ></Nav>
+        <Nav updateCart={actualizoProductos} itemCart={cart}></Nav>
       </header>
       <div className="App-content">
         <aside className="App-aside">
-          <Box sx={{ flexGrow: 1,  display: { xs: "flex" }, m: "10px" }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex" }, m: "10px" }}>
             {/*  */}
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Categorias</InputLabel>
@@ -148,15 +144,12 @@ function App() {
                 ))}
               </Select>
             </FormControl>
-
-            
           </Box>
-        <Box sx={{color: "black", m: "5px"}}>
-        <span>Seleccione Precio Maximo
-        </span>
+          <Box sx={{ color: "black", m: "5px" }}>
+            <span>Seleccione Precio Maximo</span>
           </Box>
-          <Box  fullWidth sx={{ width: "90%", m: "3%" , mt: "40px"}}>
-          <Slider
+          <Box fullWidth sx={{ width: "90%", m: "3%", mt: "40px" }}>
+            <Slider
               aria-label="Small steps"
               defaultValue={3000}
               step={100}
@@ -164,35 +157,38 @@ function App() {
               min={0}
               max={5000}
               valueLabelDisplay="on"
-              onChange={(event, newValue) => { console.log("Cambio Slider", newValue); 
-              setValueSlide(newValue) }}            />
+              onChange={(event, newValue) => {
+                console.log("Cambio Slider", newValue);
+                setValueSlide(newValue);
+              }}
+            />
           </Box>
-         
         </aside>
         <section className="App-section">
           <h1>Productos</h1>
-
+          {/* cargando - false */}
           {cargando ? (
             <>
               <div className="contenedor-productos">
                 {data && data.products && data.products.length > 0 ? (
                   <>
-                    {data.products.filter(item=> (item.price < valueSlide)).map((item, index) => (
-                      <div className="productos">
-                        <Producto
-                          key={index}
-                          item={item}
-                          addToCart={addToCart}
-                        />
-                      </div>
-                    ))}
+                    {data.products
+                      .filter((item) => item.price < valueSlide)
+                      .map((item, index) => (
+                        <div className="productos">
+                          <Producto
+                            key={index}
+                            item={item}
+                            addToCart={addToCart}
+                          />
+                        </div>
+                      ))}
                   </>
                 ) : (
                   <>No hay productos</>
                 )}
               </div>
               <div className="contenedor-paginacion">
-                
                 <button className="boton" onClick={() => back()}>
                   Anterior
                 </button>
@@ -203,7 +199,21 @@ function App() {
               </div>
             </>
           ) : (
-            <>Cargando...</>
+            <>
+              <div style={{ alignContent: "center", height: "400px" }}>
+                <h1 style={{ padding: "20px" }}>Cargando...</h1>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    m: "20px",
+                  }}
+                >
+                  <CircularProgress color="secondary" size="100px" thickness="5" />
+                </Box>
+              </div>
+            </>
           )}
         </section>
       </div>

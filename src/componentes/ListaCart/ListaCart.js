@@ -76,10 +76,8 @@ export default function ListaCart(props) {
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
         <TableHead>
           <TableRow>
-            <TableCell align="center" colSpan={3}>
-              Details
-            </TableCell>
-            <TableCell align="right">Price</TableCell>
+            <TableCell align="center" colSpan={3}>Detalles</TableCell>
+            <TableCell align="center" colSpan={4}>Precio</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Desc</TableCell>
